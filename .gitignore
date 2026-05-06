@@ -1,5 +1,27 @@
-*.zip
-node_modules/
-venv/
+# Python
+.venv/
 __pycache__/
-.env
+*.py[cod]
+*$py.class
+
+# Node / frontend build
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Go build output
+tools/mock-pi/mock-pi
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Scratch / tool state
+.playwright-mcp/
+.sixth/
+

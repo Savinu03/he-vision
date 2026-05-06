@@ -1,0 +1,34 @@
+# HE-Vision runtime configuration.
+#
+# Copy this file and adjust as needed. The backend loads it on startup.
+# To use a different file, set HE_VISION_CONFIG=/absolute/path/to/config.toml.
+
+# --- Auth ------------------------------------------------------------
+# Simple whitelist: only these two emails may log in, and each is bound to a
+# role. No password — intended for a kiosk on a trusted LAN, not public
+# internet. Keep both values in sync with whatever you hand out to staff.
+[auth]
+worker_email = "worker@prym.local"
+admin_email  = "admin@prym.local"
+
+# --- Storage ---------------------------------------------------------
+# Active: Detail10 extracted as a standalone single-sheet xlsx (331 rows).
+# Keeps the original Detail10 cell formatting; adds a Defect count column on
+# first load and writes single-cell updates with openpyxl.
+#
+# Re-extract from the latest master with:
+#   .venv/bin/python tools/extract_sheet.py \
+#       --xlsx "H&E Master Plan Final-.xlsx" --sheet Detail10 \
+#       --out Detail10.xlsx
+#
+# Or extract as CSV instead (smaller, faster, drops formatting):
+#   .venv/bin/python tools/extract_sheet.py \
+#       --xlsx "H&E Master Plan Final-.xlsx" --sheet Detail10 \
+#       --header-row 3 --out Detail10.csv
+[storage]
+data_path = "Detail10.xlsx"
+xlsx_sheet = "Detail10"
+header_row = 3
+
+[storage.columns]
+qty_with_tolerance = "Qty with tollerence"   # typo lives in the source sheet
